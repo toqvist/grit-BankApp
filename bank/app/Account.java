@@ -1,21 +1,44 @@
 package bank.app;
 
+
+//Accounts should be created and managed in Bank with createAccount and deleteaccount.
+//Add the object references to the account lists using addAccount and removeAccount.
 public class Account {
-    double balance;
-    long accountNumber; 
-    String accountType; 
+    private double balance;
+    private int accountNumber; 
+    private String accountType; 
     
     //Constructor
-    public Account (long accountNumber, String accountType, double balance) {
-        if (accountType.equals("Debit")) {//Probably not an optimal way of making sure it's a debit. 
-            this.balance = balance;
-            this.accountNumber = accountNumber;
-            this.accountType = accountType;
-        } else {
-            System.out.println("ERROR: Invalid account parameters for account " + accountNumber);
-        }
+    public Account (int accountNumber) {
+        //Hardcode account type to debit. If more types are needed, parameterize accountType.
+        this.accountType = "debit";
+        this.balance = 0;
+        this.accountNumber = accountNumber;
     }
    
+    public int getAccountNumber() {
+        return accountNumber;
+    }
+    public double getBalance() {
+        return balance;
+    }
+    public String accountType() {
+        return accountType;
+    }
+    public void setAccountNumber(int accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
+    //Avoid usage of setBalance, use deposit and withdraw instead
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+    public String getAccountType() {
+        return accountType;
+    }
+
     void deposit(double deposit) {
         if (deposit > 0) { //Deposits of negative value should not be possible. 
             this.balance += deposit;
@@ -26,7 +49,11 @@ public class Account {
 
     void withdraw(double withdrawal) {
          if (withdrawal > 0) { //Withdrawals of negative value should not be possible. 
-            this.balance -= withdrawal;
+            if(this.balance - withdrawal >= 0) {
+                this.balance -= withdrawal;
+            } else {
+                System.out.println("Withdrawal cannot exceed account balance.");
+            }
         } else {
             System.out.println("ERROR: Withdrawal can not have a negative value.");
         }
