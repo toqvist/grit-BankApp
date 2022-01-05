@@ -19,7 +19,7 @@ public class Bank {
         this.accountList = new ArrayList<>();
         this.fh = new FileHandler();
     }
-    public Customer getCustomer(long personalID) {
+    public Customer getCustomer(String personalID) {
         for(int i=0;i<customerList.size();i++) {
             if (personalID == customerList.get(i).getPersonalID()) {
                 return customerList.get(i);
@@ -41,16 +41,18 @@ public class Bank {
         
     }
     
-    public boolean customerExists(long personalID) { 
+    public boolean customerExists(String personalID) { 
         for(int i=0;i<customerList.size();i++) {
-            if (personalID == customerList.get(i).getPersonalID()) {
+            if (personalID.equals(customerList.get(i).getPersonalID())) {
+                System.out.println("true");
                 return true;
             }
         }
+        System.out.println("false");
         return false;
     }
 
-    public void createCustomer(String name, long personalID) {
+    public void createCustomer(String name, String personalID) {
         if(!customerExists(personalID)) {
             this.customerList.add(new Customer(name,personalID));
             System.out.println("Customer " + name +" added");
@@ -62,18 +64,18 @@ public class Bank {
 
     //Loops through customer list to find list index of user, then uses index to remove list entry of user. 
     //Customer object remains but is unreachable.
-    public void deleteCustomer(long personalID) {
+    public void deleteCustomer(String personalID) {
         for (int i=0;i<customerList.size();i++ ) {
-            if(customerList.get(i).getPersonalID()== personalID) {
+            if(customerList.get(i).getPersonalID().equals( personalID) ) {
                 customerList.remove(i);
                 break;
             }
         }
     }
 
-    public void deleteCustomerAndTheirAccounts (long personalID) {
+    public void deleteCustomerAndTheirAccounts (String personalID) {
         for (int i=0;i<customerList.size();i++ ) {
-            if(customerList.get(i).getPersonalID()== personalID) {
+            if(customerList.get(i).getPersonalID().equals(personalID)) {
                 customerList.get(i).removeAllAccounts();
                 customerList.remove(i);
                 break;
@@ -81,9 +83,9 @@ public class Bank {
         }
     }
 
-    public void createAccount(long personalID) {
+    public void createAccount(String personalID) {
         for (int i=0;i<customerList.size();i++ ) {
-            if(customerList.get(i).getPersonalID()== personalID) {
+            if(customerList.get(i).getPersonalID().equals(personalID)) {
                 int accountNumber = generateAccountNumber();
                 Account newAccount = new Account(accountNumber);
                 accountList.add(newAccount);
@@ -103,18 +105,20 @@ public class Bank {
 
     public int generateAccountNumber () {
         int returnNumber;
-        returnNumber = accountList.get(accountList.size()-1).getAccountNumber()+1;
-        //Repeat until account capacity (which i assume is 9999 here)
-        while(returnNumber < 10000) {
-            if(!accountExists(returnNumber)) {
-                return returnNumber;
-            } else {
-                returnNumber++;
+        if (accountList.size() != 0) {
+            returnNumber = accountList.get(accountList.size()).getAccountNumber()+1;
+            //Repeat until account capacity (which i assume is 9999 here)
+            while(returnNumber < 9999) {
+                if(!accountExists(returnNumber)) {
+                    return returnNumber;
+                } else {
+                    returnNumber++;
+                }
             }
-            
+            System.out.println("Account capacity reached.");
         }
-        System.out.println("Account capacity reached.");
-        return 0;
+        
+        return 1000;
     }
 
 
@@ -133,7 +137,7 @@ public class Bank {
             //Unpack string
             String[] dataToWrite = dbData.get(i).split("%");
             
-            long personalID = Long.parseLong(dataToWrite[0]);
+            String personalID = dataToWrite[0];
             
             String nameArray[] = dataToWrite[1].split(",");
             
@@ -159,7 +163,7 @@ public class Bank {
             //Unpack string
             String[] dataToWrite = mockData.get(i).split("%");
             
-            long personalID = Long.parseLong(dataToWrite[0]);
+            String personalID = dataToWrite[0];
             
             String nameArray[] = dataToWrite[1].split(",");
             

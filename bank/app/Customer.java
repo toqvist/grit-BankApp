@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class Customer  {
     private String name;
-    private long personalID;
+    private String personalID;
     private ArrayList<Account> userAccountList; //List of account numbers belonging to the customer.
     
-    public Customer (String name, long personalID) {
+    public Customer (String name, String personalID) {
         this.name = name;
         this.personalID = personalID;
         this.userAccountList = new ArrayList<>();
@@ -21,11 +21,11 @@ public class Customer  {
         this.name = name;
     }
 
-    public long getPersonalID() {
+    public String getPersonalID() {
         return personalID;
     }
 
-    public void setPersonalID(long personalID) {
+    public void setPersonalID(String personalID) {
         this.personalID = personalID;
     }
 

@@ -44,7 +44,7 @@ public class Main {
             } 
 
             //Declare variables for the switch-case.
-            long customerID;
+            String customerID;
             
             switch(userInput) {
                 
@@ -55,7 +55,7 @@ public class Main {
                     break;
                 case 2: //Create new customer
                     System.out.println("Enter customer personal ID:");
-                    customerID = scanner.nextLong(); 
+                    customerID = scanner.next(); 
 
                     System.out.println("Enter customer forename :");
                     String customerName = scanner.next() + ",";
@@ -68,18 +68,18 @@ public class Main {
                     break;
                 case 3://Delete Customer, close all their accounts
                     System.out.println("Enter customer personal ID:");
-                    customerID = scanner.nextLong();
+                    customerID = scanner.next();
                     bank.deleteCustomerAndTheirAccounts(customerID);
                     
                     break;
                 case 4: //Create new Account, add to customer
                     System.out.println("Enter customer personal ID: ");    
-                    customerID = scanner.nextLong();
+                    customerID = scanner.next();
                     bank.createAccount(customerID);
                     break;
                 case 5: //Close Account, print balance
                     System.out.println("Enter account holder personal ID: ");
-                    customerID = scanner.nextLong();
+                    customerID = scanner.next();
 
                     System.out.println("Enter account number: ");
                     int accountNumber = scanner.nextInt();

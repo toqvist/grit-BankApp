@@ -62,7 +62,7 @@ public class FileHandler {
             String forename = name[0];
             String surname = name[1];
 
-            filewriter.write(Long.toString(customerList.get(i).getPersonalID()) +
+            filewriter.write(customerList.get(i).getPersonalID() +
             "%" +
             forename +
             "," +
