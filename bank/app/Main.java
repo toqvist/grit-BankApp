@@ -15,23 +15,23 @@ public class Main {
             System.out.println("Welcome to bank!");
             System.out.println("[1] - Exit App");
             System.out.println("------CUSTOMER ACTIONS-------");
-            System.out.println("[2] - Create new Customer"); //Will first check if customer exists, then create.
+            System.out.println("[2] - Create new Customer");
             System.out.println("[3] - Delete Customer, close all their accounts");
             System.out.println("[4] - Print customer info, their accounts, and their balances.");
             System.out.println("[5] - Change customer name.");
             System.out.println("------ACCOUNT ACTIONS-------");
-            System.out.println("[6] - Create new Account, add to customer"); //Will first check if account exists, then if customer already has account.
+            System.out.println("[6] - Create new Account, add to customer"); 
             System.out.println("[7] - Close Account, print balance");
             System.out.println("[8] - Deposit into account");
             System.out.println("[9] - Withdraw from account");
             System.out.println("------DATABASE ACTIONS-------");
-            System.out.println("[10] - Write customer list to database"); //Working as intended
-            System.out.println("[11] - Get customer list from database"); //Working as intended.
-            System.out.println("[12] - Print all customers from database");  //Working as intended
-            System.out.println("[13] - Create mock customers and add to customer list"); //Working as intended.
+            System.out.println("[10] - Write customer list to database"); 
+            System.out.println("[11] - Get customer list from database"); 
+            System.out.println("[12] - Print all customers from database");
+            System.out.println("[13] - Create mock customers and add to customer list");
             System.out.println("------DIAGNOSTIC ACTIONS-------");
-            System.out.println("[14] - Verify filehandler can find files."); //Working as intended.
-            System.out.println("[15] - Print customer list."); //Working as intended.
+            System.out.println("[14] - Verify filehandler can find files.");
+            System.out.println("[15] - Print customer list.");
             System.out.println("Enter input: ");
             
             Scanner scanner = new Scanner(System.in);
