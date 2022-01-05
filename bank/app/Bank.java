@@ -19,16 +19,26 @@ public class Bank {
         this.accountList = new ArrayList<>();
         this.fh = new FileHandler();
     }
-
+    public Customer getCustomer(long personalID) {
+        for(int i=0;i<customerList.size();i++) {
+            if (personalID == customerList.get(i).getPersonalID()) {
+                return customerList.get(i);
+            }
+        }
+        return null;
+    }
 
     //Check list of all bank accounts and return answer to if a duplicate account exists.
     public boolean accountExists(int accountNumber) { 
         for(int i=0;i<accountList.size();i++) {
             if (accountNumber == accountList.get(i).getAccountNumber()){
+                System.out.println("true");
                 return true;
             }
         }
+        System.out.println("false");
         return false;
+        
     }
     
     public boolean customerExists(long personalID) { 
@@ -40,9 +50,13 @@ public class Bank {
         return false;
     }
 
-    public void createCustomer(String name, long socialSecNumber) {
-        this.customerList.add(new Customer(name,socialSecNumber));
-        System.out.println("Customer " + name +" added");
+    public void createCustomer(String name, long personalID) {
+        if(!customerExists(personalID)) {
+            this.customerList.add(new Customer(name,personalID));
+            System.out.println("Customer " + name +" added");
+        } else {
+            System.out.println("Customer already exists");
+        }
     }
 
 
@@ -67,8 +81,15 @@ public class Bank {
         }
     }
 
-    public void createAccount() {
-        accountList.add(new Account(generateAccountNumber()));
+    public void createAccount(long personalID) {
+        for (int i=0;i<customerList.size();i++ ) {
+            if(customerList.get(i).getPersonalID()== personalID) {
+                int accountNumber = generateAccountNumber();
+                Account newAccount = new Account(accountNumber);
+                accountList.add(newAccount);
+                customerList.get(i).addAccount(newAccount);
+            }
+        }
     }
 
     public void deleteAccount(int accountNumber) {

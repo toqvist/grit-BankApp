@@ -58,6 +58,8 @@ public class Customer  {
     public void closeAccount (int accountNumber) {
         for (int i=0;i<userAccountList.size();i++) {
             if (accountNumber == userAccountList.get(i).getAccountNumber()) {
+                System.out.println("Closing account \"" + accountNumber + "\" ");
+                System.out.println("Balance: " + userAccountList.get(i).getBalance());
                 userAccountList.remove(i);
                 break;
             }

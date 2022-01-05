@@ -24,9 +24,9 @@ public class Main {
             System.out.println("[7] - Deposit into account");
             System.out.println("[8] - Withdraw from account");
             System.out.println("------DATABASE ACTIONS-------");
-            System.out.println("[9] - Write customer list to database");
+            System.out.println("[9] - Write customer list to database"); //Working as intended
             System.out.println("[10] - Get customer list from database"); //Working as intended.
-            System.out.println("[11] - Print all customers from database"); 
+            System.out.println("[11] - Print all customers from database");  //Working as intended
             System.out.println("[12] - Create mock customers with accounts, put them into customer list"); //Working as intended.
             System.out.println("------DIAGNOSTIC ACTIONS-------");
             System.out.println("[13] - Verify filehandler can find files."); //Working as intended.
@@ -43,7 +43,11 @@ public class Main {
                 System.out.println("Input must be a valid integer from printed choices!");
             } 
 
+            //Declare variables for the switch-case.
+            long customerID;
+            
             switch(userInput) {
+                
                 case 0: //Do nothing
                     break;
                 case 1: //Exit
@@ -51,7 +55,7 @@ public class Main {
                     break;
                 case 2: //Create new customer
                     System.out.println("Enter customer personal ID:");
-                    long customerID2 = scanner.nextLong(); 
+                    customerID = scanner.nextLong(); 
 
                     System.out.println("Enter customer forename :");
                     String customerName = scanner.next() + ",";
@@ -59,18 +63,30 @@ public class Main {
                     System.out.println("Enter customer surname :");
                     customerName += scanner.next();
 
-                    bank.createCustomer(customerName, customerID2);
+                    bank.createCustomer(customerName, customerID);
 
                     break;
                 case 3://Delete Customer, close all their accounts
                     System.out.println("Enter customer personal ID:");
-                    long customerID3 = scanner.nextLong();
-                    bank.deleteCustomerAndTheirAccounts(customerID3);
+                    customerID = scanner.nextLong();
+                    bank.deleteCustomerAndTheirAccounts(customerID);
                     
                     break;
                 case 4: //Create new Account, add to customer
+                    System.out.println("Enter customer personal ID: ");    
+                    customerID = scanner.nextLong();
+                    bank.createAccount(customerID);
                     break;
                 case 5: //Close Account, print balance
+                    System.out.println("Enter account holder personal ID: ");
+                    customerID = scanner.nextLong();
+
+                    System.out.println("Enter account number: ");
+                    int accountNumber = scanner.nextInt();
+
+                    //Delete both references to account, closeAccount prints balance.
+                    bank.getCustomer(customerID).closeAccount(accountNumber);
+                    bank.deleteAccount(accountNumber);
                     break;
                 case 6: //Remove account from user
                     break;
@@ -80,9 +96,11 @@ public class Main {
                     break;
                 case 9: //Write customer list to database
                     bank.writeCustomersToDB();
+                    System.out.println("Current list of users written to database");
                     break;
                 case 10: //Get customer list from database
                     bank.addCustomersFromDB();
+                    System.out.println("Current list of users appended with non-duplicate customers from database");
                     break;
                 case 11: //Print customers from database
                     bank.printCustomerData();
