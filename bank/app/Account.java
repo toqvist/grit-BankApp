@@ -45,7 +45,7 @@ public class Account {
             System.out.println("Deposited " + deposit);
             System.out.println("New balance: " + this.balance);
         } else {
-            System.out.println("ERROR: Deposit can not have a negative value.");
+            System.out.println("Deposit can not have a negative value!");
         }
     }
 
@@ -59,7 +59,7 @@ public class Account {
                 System.out.println("Withdrawal cannot exceed account balance.");
             }
         } else {
-            System.out.println("ERROR: Withdrawal can not have a negative value.");
+            System.out.println("Withdrawal can not have a negative value!");
         }
     }
 

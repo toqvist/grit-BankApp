@@ -87,6 +87,7 @@ public class Bank {
             if(customerList.get(i).getPersonalID().equals(personalID)) {
                 customerList.get(i).removeAllAccounts();
                 customerList.remove(i);
+                System.out.println("Deleted customer with ID: " + personalID);
                 break;
             }
         }
@@ -117,7 +118,9 @@ public class Bank {
     public int generateAccountNumber () {
         int returnNumber;
         if (accountList.size() != 0) {
-            returnNumber = accountList.get(accountList.size()).getAccountNumber()+1;
+            //Get account number of last account in account list.
+            returnNumber = accountList.get(accountList.size()-1).getAccountNumber();
+            returnNumber++;
             //Repeat until account capacity (which i assume is 9999 here)
             while(returnNumber < 9999) {
                 if(!accountExists(returnNumber)) {
@@ -127,9 +130,11 @@ public class Bank {
                 }
             }
             System.out.println("Account capacity reached.");
+            
+        } else {
+             returnNumber = 1001;
         }
-        
-        return 1001;
+        return returnNumber;
     }
 
 

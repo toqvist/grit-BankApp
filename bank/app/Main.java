@@ -28,7 +28,7 @@ public class Main {
             System.out.println("[10] - Write customer list to database"); //Working as intended
             System.out.println("[11] - Get customer list from database"); //Working as intended.
             System.out.println("[12] - Print all customers from database");  //Working as intended
-            System.out.println("[13] - Create mock customers with accounts, put them into customer list"); //Working as intended.
+            System.out.println("[13] - Create mock customers and add to customer list"); //Working as intended.
             System.out.println("------DIAGNOSTIC ACTIONS-------");
             System.out.println("[14] - Verify filehandler can find files."); //Working as intended.
             System.out.println("[15] - Print customer list."); //Working as intended.
@@ -136,7 +136,7 @@ public class Main {
                 case 12: //Print customers from database
                     bank.printCustomerData();
                     break;
-                case 13: //Create mock customers with accounts, populate database with customers.
+                case 13: //Create mock customers and add to customer list
                     bank.addCustomersFromMockData();
                     break;
                 case 14: //Verify filehandler can find files.
