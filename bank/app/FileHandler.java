@@ -28,8 +28,7 @@ public class FileHandler {
         BufferedReader br = new BufferedReader(new FileReader(customers_db));
         ArrayList<String> customerList = new ArrayList<String>();
         
-        int i=0;
-        for (String line; (line = br.readLine()) != null;i++) {
+        for (String line; (line = br.readLine()) != null;) {
             customerList.add(line);
             
         }

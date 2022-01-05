@@ -21,8 +21,17 @@ public class Bank {
     }
     public Customer getCustomer(String personalID) {
         for(int i=0;i<customerList.size();i++) {
-            if (personalID == customerList.get(i).getPersonalID()) {
+            if (personalID.equals(customerList.get(i).getPersonalID())) {
                 return customerList.get(i);
+            }
+        }
+        return null;
+    }
+
+    public Account getAccount(int accountNumber) {
+        for(int i=0;i<accountList.size();i++) {
+            if (accountNumber == accountList.get(i).getAccountNumber()) {
+                return accountList.get(i);
             }
         }
         return null;
@@ -90,6 +99,7 @@ public class Bank {
                 Account newAccount = new Account(accountNumber);
                 accountList.add(newAccount);
                 customerList.get(i).addAccount(newAccount);
+                System.out.println("New account created: " + accountNumber);
             }
         }
     }
@@ -98,6 +108,7 @@ public class Bank {
         for (int i=0;i<accountList.size();i++ ) {
             if(accountList.get(i).getAccountNumber() == accountNumber) {
                 accountList.remove(i);
+                System.out.println("Account deleted: " + accountNumber);
                 break;
             }
         }
@@ -118,7 +129,7 @@ public class Bank {
             System.out.println("Account capacity reached.");
         }
         
-        return 1000;
+        return 1001;
     }
 
 
@@ -145,7 +156,6 @@ public class Bank {
             String surname = nameArray[1];
             String name = forename + " " + surname;
 
-            
             //createCustomer writes the data into a list entry in the bank customerList.
             createCustomer(name, personalID);
             
@@ -187,7 +197,7 @@ public class Bank {
             //Unpack string
             String[] dataToWrite = dbData.get(i).split("%");
             
-            long personalID = Long.parseLong(dataToWrite[0]);
+            String personalID = dataToWrite[0];
             
             String nameArray[] = dataToWrite[1].split(",");
             
@@ -195,17 +205,24 @@ public class Bank {
             String surname = nameArray[1];
             String name = forename + " " + surname;
             
-            System.out.println("Customer " + (i+1) + ":" + name);
+            System.out.println("Customer " + (i+1) + ": " + name + ", ID: " + personalID);
         }
     }
 
     public void printCustomerList() {
         System.out.println(customerList.size());
         for (int i=0;i<customerList.size();i++) {
-            System.out.println(customerList.get(i).getName());
+            System.out.println(customerList.get(i).getPersonalID() + " " + customerList.get(i).getName());
+            
         }
     }
     
+    public void printCustomerInfo (String personalID) {
+        Customer customer = getCustomer(personalID);
+        System.out.println("Customer: " + customer.getName() + " ID: " + customer.getPersonalID() + " has the following accounts: ");
+        customer.showAccounts();
+        
+    }
 }
 
 

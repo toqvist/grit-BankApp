@@ -42,6 +42,8 @@ public class Account {
     void deposit(double deposit) {
         if (deposit > 0) { //Deposits of negative value should not be possible. 
             this.balance += deposit;
+            System.out.println("Deposited " + deposit);
+            System.out.println("New balance: " + this.balance);
         } else {
             System.out.println("ERROR: Deposit can not have a negative value.");
         }
@@ -51,6 +53,8 @@ public class Account {
          if (withdrawal > 0) { //Withdrawals of negative value should not be possible. 
             if(this.balance - withdrawal >= 0) {
                 this.balance -= withdrawal;
+                System.out.println("Withdrew " + withdrawal);
+                System.out.println("New balance: " + this.balance);
             } else {
                 System.out.println("Withdrawal cannot exceed account balance.");
             }
@@ -60,7 +64,7 @@ public class Account {
     }
 
     void showInfo () { 
-        System.out.println(this.accountType + " " + this.accountNumber + " has balance: " + this.balance);
+        System.out.println(this.accountType + " account: " + this.accountNumber + "--Balance: " + this.balance);
     }
    
 
