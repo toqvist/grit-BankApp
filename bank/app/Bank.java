@@ -41,11 +41,9 @@ public class Bank {
     public boolean accountExists(int accountNumber) { 
         for(int i=0;i<accountList.size();i++) {
             if (accountNumber == accountList.get(i).getAccountNumber()){
-                System.out.println("true");
                 return true;
             }
         }
-        System.out.println("false");
         return false;
         
     }
@@ -53,11 +51,9 @@ public class Bank {
     public boolean customerExists(String personalID) { 
         for(int i=0;i<customerList.size();i++) {
             if (personalID.equals(customerList.get(i).getPersonalID())) {
-                System.out.println("true");
                 return true;
             }
         }
-        System.out.println("false");
         return false;
     }
 
